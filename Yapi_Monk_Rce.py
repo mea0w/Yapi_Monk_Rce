@@ -1,7 +1,7 @@
 '''
     Yapi mock 远程代码执行漏洞检测脚本。
                                         ——by jammny.
-    用法：python Yapi_Mock_Rce.py [ip] [cmd]
+    用法：python Yapi_Mock_Rce.py http://127.0.0.1 whoami
 '''
 
 import requests, sys, random, json
